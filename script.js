@@ -12,34 +12,35 @@
                 if (Math.random() < 0.5) {
                     resolve(randomNumber);
                 } else {
-                    reject(new Error(`Promise rejected with error`));
+                    reject(new Error(error));
                 }
             });
         }
 
-        function executePromises() {
-            // Create an array of 5 promises
-            const promises = Array.from({ length: 5 }, createRandomPromise);
+function executePromises() {
+    // Create an array of 5 promises
+    const promises = Array.from({ length: 5 }, createRandomPromise);
 
-            // Use Promise.all to wait for all promises to settle
-            Promise.all(promises)
-                .then(results => {
-                    // Log the array of results
-                    const outputDiv = document.getElementById('output');
-                    results.forEach((result, index) => {
-                        const pTag = document.createElement('p');
-                        pTag.textContent = ` ${index + 1}  ${result}`;
-                        outputDiv.appendChild(pTag);
-                    });
-                })
-                .catch(error => {
-                    // Log the error if any promise rejects
-                    const outputDiv = document.getElementById('output');
-                    const pTag = document.createElement('p');
-                    pTag.textContent = `promises ${index + 1} rejected with error: ${error.message}`;
-                    outputDiv.appendChild(pTag);
-                });
-        }
+    // Use Promise.all to wait for all promises to settle
+    Promise.all(promises)
+        .then(results => {
+            // Log the array of results
+            const outputDiv = document.getElementById('output');
+            results.forEach((result, index) => {
+                const pTag = document.createElement('p');
+                pTag.textContent = ` ${index + 1}  ${result}`;
+                outputDiv.appendChild(pTag);
+            });
+        })
+        .catch((error, index) => {
+            // Log the error if any promise rejects
+            const outputDiv = document.getElementById('output');
+            const pTag = document.createElement('p');
+            pTag.textContent = `promises ${index + 1} rejected with error: ${error.message}`;
+            outputDiv.appendChild(pTag);
+        });
+}
+
 
         // Execute the promises when the script is loaded
         executePromises();
