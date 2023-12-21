@@ -5,17 +5,18 @@
             return Math.floor(Math.random() * 10) + 1;
         }
 
-        function createRandomPromise() {
-            // Create a promise with a 50% chance of resolving or rejecting
-            return new Promise((resolve, reject) => {
-                const randomNumber = getRandomNumber();
-                if (Math.random() < 0.5) {
-                    resolve(randomNumber);
-                } else {
-                    reject(new Error(error));
-                }
-            });
+function createRandomPromise() {
+    // Create a promise with a 50% chance of resolving or rejecting
+    return new Promise((resolve, reject) => {
+        const randomNumber = getRandomNumber();
+        if (Math.random() < 0.5) {
+            resolve(randomNumber);
+        } else {
+            reject(new Error("Random error message")); // Replace "error" with an appropriate error message
         }
+    });
+}
+
 
 function executePromises() {
     // Create an array of 5 promises
